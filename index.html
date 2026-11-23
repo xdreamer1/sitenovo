@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Glow | Beleza e Cosmética</title>
+
+    <style>
+        :root {
+            --rosa: #d36f91;
+            --rosa-claro: #fff0f4;
+            --escuro: #34252c;
+            --cinza: #766970;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: var(--escuro);
+            background: #fffafb;
+        }
+
+        header {
+            background: white;
+            padding: 20px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 12px #0000000c;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            color: var(--rosa);
+            font-size: 26px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--escuro);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--rosa);
+        }
+
+        .carrinho {
+            border: 1px solid var(--rosa);
+            color: var(--rosa);
+            padding: 9px 14px;
+            border-radius: 20px;
+        }
+
+        .hero {
+            min-height: 430px;
+            background: linear-gradient(120deg, #ffe5ed, #f7c9d7);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 60px 8%;
+            gap: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 62px);
+            max-width: 570px;
+            margin: 0 0 20px;
+        }
+
+        .hero p {
+            color: #68515b;
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 480px;
+        }
+
+        .hero-art {
+            font-size: clamp(90px, 15vw, 180px);
+            text-align: center;
+        }
+
+        button {
+            background: var(--rosa);
+            color: white;
+            border: none;
+            padding: 14px 26px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #b95579;
+            transform: translateY(-2px);
+        }
+
+        .secao {
+            max-width: 1200px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .titulo {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: var(--cinza);
+            margin-bottom: 40px;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .produto {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px #0000000d;
+            transition: 0.2s;
+        }
+
+        .produto:hover {
+            transform: translateY(-5px);
+        }
+
+        .imagem-produto {
+            height: 230px;
+            background: linear-gradient(145deg, #ffe5ed, #f4bbd0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 95px;
+        }
+
+        .produto-info {
+            padding: 22px;
+        }
+
+        .produto h3 {
+            margin: 0 0 10px;
+        }
+
+        .produto p {
+            color: var(--cinza);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .preco {
+            color: var(--rosa);
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .produto button {
+            width: 100%;
+        }
+
+        .vantagens {
+            background: var(--rosa-claro);
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .vantagens-conteudo {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .vantagem {
+            max-width: 220px;
+        }
+
+        .vantagem span {
+            font-size: 35px;
+        }
+
+        /* Página individual de produto */
+        .pagina-produto {
+            display: none;
+            max-width: 1100px;
+            margin: auto;
+            padding: 65px 25px;
+        }
+
+        .detalhes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .imagem-grande {
+            min-height: 420px;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #ffe3ed, #efb3ca);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 170px;
+        }
+
+        .detalhes h1 {
+            font-size: 40px;
+        }
+
+        .detalhes p,
+        .detalhes li {
+            color: var(--cinza);
+            line-height: 1.9;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-bottom: 35px;
+            color: var(--rosa);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #34252c;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        #aviso {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--escuro);
+            color: white;
+            padding: 16px 22px;
+            border-radius: 12px;
+            display: none;
+            z-index: 20;
+        }
+
+        @media (max-width: 900px) {
+            .produtos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .detalhes {
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                justify-content: center;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .produtos {
+                grid-template-columns: 1fr;
+            }
+
+            .detalhes {
+                grid-template-columns: 1fr;
+            }
+
+            .imagem-grande {
+                min-height: 290px;
+                font-size: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo" onclick="mostrarPagina('inicio')">
+            Bella Glow ✨
+        </div>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#creme">Creme Facial</a>
+            <a href="#serum">Sérum</a>
+            <a href="#mascara">Máscara</a>
+            <a href="#protetor">Protetor Solar</a>
+        </nav>
+
+        <div class="carrinho">
+            🛒 <span id="quantidade">0</span>
+        </div>
+    </header>
+
+    <!-- Landing page inicial -->
+    <main id="inicio">
+
+        <section class="hero">
+            <div>
+                <h1>Realça a tua beleza natural</h1>
+                <p>
+                    Descobre os nossos produtos de beleza,
+                    pensados para transformar a tua rotina
+                    de cuidados pessoais.
+                </p>
+                <button onclick="verProdutos()">
+                    Explorar produtos
+                </button>
+            </div>
+
+            <div class="hero-art">🧴🌸</div>
+        </section>
+
+        <section class="secao" id="catalogo">
+            <h2 class="titulo">Os nossos produtos</h2>
+            <p class="subtitulo">
+                Escolhe o cuidado ideal para a tua pele e cabelo.
+            </p>
+
+            <div class="produtos">
+
+                <article class="produto">
+                    <div class="imagem-produto">🧴</div>
+                    <div class="produto-info">
+                        <h3>Creme Hidratante</h3>
+                        <p>
+                            Hidratação diária para uma pele
+                            suave e confortável.
+                        </p>
+                        <div class="preco">19,90 €</div>
+                        <button onclick="mostrarPagina('creme')">
+                            Ver produto
+                        </button>
+                    </div>
+                </article>
+
+                <article class="produto">
+                    <div class="imagem-produto">💧</div>
+                    <div class="produto-info">
+                        <h3>Sérum Vitamina C</h3>
+                        <p>
+                            Um cuidado facial para uma
+                            aparência mais luminosa.
+                        </p>
+                        <div class="preco">24,90 €</div>
+                        <button onclick="mostrarPagina('serum')">
+                            Ver produto
+                        </button>
+                    </div>
+                </article>
+
+                <article class="produto">
+                    <div class="imagem-produto">🌺</div>
+                    <div class="produto-info">
+                        <h3>Máscara Capilar</h3>
+                        <p>
+                            Nutrição e suavidade para
+                            o cuidado do cabelo.
+                        </p>
+                        <div class="preco">16,90 €</div>
+                        <button onclick="mostrarPagina('mascara')">
+                            Ver produto
+                        </button>
+                    </div>
+                </article>
+
+                <article class="produto">
+                    <div class="imagem-produto">☀️</div>
+                    <div class="produto-info">
+                        <h3>Protetor Solar SPF 50+</h3>
+                        <p>
+                            Proteção solar elevada para
+                            a rotina diária.
+                        </p>
+                        <div class="preco">21,90 €</div>
+                        <button onclick="mostrarPagina('protetor')">
+                            Ver produto
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="vantagens">
+            <h2>Porque escolher Bella Glow?</h2>
+
+            <div class="vantagens-conteudo">
+                <div class="vantagem">
+                    <span>🌿</span>
+                    <h3>Cuidados diários</h3>
+                    <p>Produtos pensados para a tua rotina.</p>
+                </div>
+
+                <div class="vantagem">
+                    <span>💗</span>
+                    <h3>Beleza e bem-estar</h3>
+                    <p>Dedica um momento especial a ti.</p>
+                </div>
+
+                <div class="vantagem">
+                    <span>✨</span>
+                    <h3>Rotina simples</h3>
+                    <p>Descobre os teus novos essenciais.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Página 1: Creme -->
+    <section id="creme" class="pagina-produto">
+        <a class="voltar" href="#inicio">← Voltar à loja</a>
+
+        <div class="detalhes">
+            <div class="imagem-grande">🧴</div>
+
+            <div>
+                <h1>Creme Hidratante Facial</h1>
+                <p>
+                    Um creme de textura suave para integrar
+                    na tua rotina diária de hidratação.
+                </p>
+
+                <ul>
+                    <li>Ideal para cuidados diários</li>
+                    <li>Textura cremosa</li>
+                    <li>Embalagem de 50 ml</li>
+                </ul>
+
+                <div class="preco">19,90 €</div>
+
+                <button onclick="adicionarCarrinho('Creme Hidratante')">
+                    🛒 Adicionar ao carrinho
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Página 2: Sérum -->
+    <section id="serum" class="pagina-produto">
+        <a class="voltar" href="#inicio">← Voltar à loja</a>
+
+        <div class="detalhes">
+            <div class="imagem-grande">💧</div>
+
+            <div>
+                <h1>Sérum Facial Vitamina C</h1>
+                <p>
+                    Um sérum para complementar os cuidados
+                    faciais e promover uma aparência luminosa.
+                </p>
+
+                <ul>
+                    <li>Com vitamina C</li>
+                    <li>Textura leve</li>
+                    <li>Embalagem de 30 ml</li>
+                </ul>
+
+                <div class="preco">24,90 €</div>
+
+                <button onclick="adicionarCarrinho('Sérum Vitamina C')">
+                    🛒 Adicionar ao carrinho
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Página 3: Máscara -->
+    <section id="mascara" class="pagina-produto">
+        <a class="voltar" href="#inicio">← Voltar à loja</a>
+
+        <div class="detalhes">
+            <div class="imagem-grande">🌺</div>
+
+            <div>
+                <h1>Máscara Capilar Nutritiva</h1>
+                <p>
+                    Uma máscara de cuidado capilar para
+                    proporcionar suavidade ao cabelo.
+                </p>
+
+                <ul>
+                    <li>Cuidado nutritivo</li>
+                    <li>Aplicação após lavagem</li>
+                    <li>Embalagem de 250 ml</li>
+                </ul>
+
+                <div class="preco">16,90 €</div>
+
+                <button onclick="adicionarCarrinho('Máscara Capilar')">
+                    🛒 Adicionar ao carrinho
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Página 4: Protetor -->
+    <section id="protetor" class="pagina-produto">
+        <a class="voltar" href="#inicio">← Voltar à loja</a>
+
+        <div class="detalhes">
+            <div class="imagem-grande">☀️</div>
+
+            <div>
+                <h1>Protetor Solar Facial SPF 50+</h1>
+                <p>
+                    Um cuidado de proteção solar elevada
+                    para utilizar na rotina diária.
+                </p>
+
+                <ul>
+                    <li>Fator de proteção SPF 50+</li>
+                    <li>Aplicação facial</li>
+                    <li>Embalagem de 50 ml</li>
+                </ul>
+
+                <div class="preco">21,90 €</div>
+
+                <button onclick="adicionarCarrinho('Protetor Solar')">
+                    🛒 Adicionar ao carrinho
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <h2>Bella Glow ✨</h2>
+        <p>A tua beleza, o teu momento.</p>
+        <p>© 2026 Bella Glow. Website demonstrativo.</p>
+    </footer>
+
+    <div id="aviso" role="status" aria-live="polite"></div>
+
+    <script>
+        let quantidade = 0;
+
+        const paginas = [
+            "inicio",
+            "creme",
+            "serum",
+            "mascara",
+            "protetor"
+        ];
+
+        function mostrarPagina(pagina) {
+            if (!paginas.includes(pagina)) {
+                pagina = "inicio";
+            }
+
+            paginas.forEach(function(id) {
+                document.getElementById(id).style.display = "none";
+            });
+
+            document.getElementById(pagina).style.display = "block";
+
+            if (window.location.hash !== "#" + pagina) {
+                window.location.hash = pagina;
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function verProdutos() {
+            document.getElementById("catalogo").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        function adicionarCarrinho(produto) {
+            quantidade++;
+
+            document.getElementById("quantidade").textContent = quantidade;
+
+            const aviso = document.getElementById("aviso");
+
+            aviso.textContent = produto + " adicionado ao carrinho!";
+            aviso.style.display = "block";
+
+            setTimeout(function() {
+                aviso.style.display = "none";
+            }, 2500);
+        }
+
+        window.addEventListener("hashchange", function() {
+            const pagina = window.location.hash.substring(1);
+            mostrarPagina(pagina || "inicio");
+        });
+
+        mostrarPagina(
+            window.location.hash.substring(1) || "inicio"
+        );
+    </script>
+
+</body>
+</html>
